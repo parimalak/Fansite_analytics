@@ -109,6 +109,38 @@ The following illustration may help you understand how this feature might work, 
 
 Note that this feature should not impact the other features in this challenge. For instance, any requests that end up in the `blocked.txt` file should be counted toward the most active IP host calculation, bandwidth consumption and busiest 60-minute period.
 
+## Coding Details
+
+The input log file has been parsed line by line using regular expressions to get host/ip adress,time stamp,request,status code and bytes send.The four features are identified using one or many of the variables.
+
+#Feature1
+
+This feature is to identify the top 10 most active hosts/ip adresses.
+
+Data structure used is defaultdict counter ,which is subclass of dictionary .The main advantage of counter is that it stores the count value for the key instead replacing the value.counter also has a method most_common that allows items to be sorted by their count. 
+
+#Feature2
+
+This feature is to identify top 10 resources that consume the most bandwidth.
+defaultdict counter stores ,total bytes sent and total no of acceses for each host. bandwidth consumption is calculated using bytes sent by total no of requests from hosts.
+
+#Feature3
+
+This feature is to list top ten busiest 60 minutes period.For this library datetime is used.The time stamp for the record is converted to datetime format.This feature is to capture the starting time of busiest hour and no of acceses during 60-minutes period.
+To my surprise,in the top 10 busiest hours for the given log file contains day 13th july 1995,which is a date where nasa launched space shuttle STS-70 with in 6 days of the previous launch STS-71 on 7th july.this launch is considered latest turnaround time during that time.  
+
+#Feature4
+
+For this feature there is 20 seconds watch time for every record and if in between that time if there are 3 continuous login attempts are failed ,then the login attempts during block time of 5 minutes are recorded in to output file.
+
+This feature is achieved by using one defaultdict varible to hold records during block time and a dictionary variable which stores hosts that are previous had login failure during watch period.once the watch time and block time are passed the blocked hosts rae removed from the data structure.
+
+#Additional Feature
+
+Distribution of status codes and their frequency in the given log file.
+
+![Distribution of status code](images/Status_code_frequency.png)
+
 ### Additional Features
 
 Feel free to implement additional features that might be useful to derive further metrics or prevent harmful activity. These features will be considered as bonus while evaluating your submission. If you choose to add extras please document them in your README and make sure that they don't interfere with the above four (e.g. don't alter the output of the four core features).
@@ -141,7 +173,7 @@ e.g., `log.txt`
     ...
     
 In the above example, the 2nd line shows a failed login (HTTP reply code of 401) followed by a successful login (HTTP reply code of 200) two seconds later from the same IP address.
-
+ 
 ## Writing clean, scalable, and well-tested code
 
 As a data engineer, it’s important that you write clean, well-documented code that scales for large amounts of data. For this reason, it’s important to ensure that your solution works well for a huge number of logged events, rather than just the simple examples above.
