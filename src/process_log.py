@@ -5,9 +5,10 @@ Created on Fri Mar 31 00:52:52 2017
 
 @author: Parimala Killada
 """
-import re,operator,sys
+import re,operator,sys,numpy as np
 from datetime import datetime,timedelta
 from collections import defaultdict, Counter
+import matplotlib.pyplot as plot
 '''
 Class has methods that performs tasks like
 parsing,analyzing,extracting features and finally writing to specified file locations
@@ -90,7 +91,21 @@ class LogAnalyzer():
         for l in top_hosts:
             hosts.write(l[0]+','+str(l[1])+'\n')
         hosts.close() 
-        
+        #Extra Featue
+        #distribution of Status codes
+        '''
+        ls=[]
+        bins=[]
+        for key,c in self.counters['status'].items():
+            ls.append(key)
+            bins.append(c)
+        plot.xticks(np.arange(len(ls)),tuple(ls))
+        plot.bar(np.arange(len(ls)),bins,align='center', alpha=0.5)
+        plot.title("Status codes")
+        plot.xlabel("status code")
+        plot.ylabel("Frequency")
+        plot.yscale('log')
+        '''
         #feature2
         #top 10 bandwidth consumption resources
         #for each site request,
