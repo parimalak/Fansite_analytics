@@ -122,12 +122,12 @@ Data structure used is defaultdict counter ,which is subclass of dictionary .The
 #Feature2
 
 This feature is to identify top 10 resources that consume the most bandwidth.
-defaultdict counter stores ,total bytes sent and total no of acceses for each host. bandwidth consumption is calculated using bytes sent by total no of requests from hosts.
+defaultdict counter stores total bytes sent and total no of acceses for each host. bandwidth consumption is calculated using bytes sent by total no of requests from hosts.
 
 #Feature3
 
 This feature is to list top ten busiest 60 minutes period.For this library datetime is used.The time stamp for the record is converted to datetime format.This feature is to capture the starting time of busiest hour and no of acceses during 60-minutes period.
-To my surprise,in the top 10 busiest hours for the given log file contains day 13th july 1995,which is a date where nasa launched space shuttle STS-70 with in 6 days of the previous launch STS-71 on 7th july.this launch is considered latest turnaround time during that time.  
+To my surprise,in the top 10 busiest hours for the given log file contains day 13th july 1995,which is a date where nasa launched space shuttle STS-70 with in 6 days of the previous launch STS-71 on 7th july.this launch is considered best turnaround time during that time.  
 
 #Feature4
 
